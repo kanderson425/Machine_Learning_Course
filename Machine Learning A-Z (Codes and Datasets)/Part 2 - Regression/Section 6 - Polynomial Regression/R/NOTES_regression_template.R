@@ -21,14 +21,25 @@ dataset = dataset[2:3]
 # Fitting Regression Model to the dataset
 # Create your regressor here
 
-# Predict a new result with Polynomial Regression
+# Predict a new result 
 y_pred = predict(regressor, data.frame(Level = 6.5))
 
-# Visualizing the Polynomial Regression Results
+# Visualizing the Regression Model
 ggplot() + 
   geom_point(aes(x = dataset$Level, y = dataset$Salary),
              colour = 'red') +
   geom_line(aes(x = dataset$Level, y = predict(regressor, newdata = dataset)),
+            colour = 'blue') +
+  ggtitle('Truth or Bluff (Regression Model)') + 
+  xlab('Level') +
+  ylab('Salary')
+
+# Visualizing the Regression Model - for higher resolution and smoother curve
+x_grid = seq(min(daataset$Level), max(dataset$Level), 0.1)
+ggplot() + 
+  geom_point(aes(x = dataset$Level, y = dataset$Salary),
+             colour = 'red') +
+  geom_line(aes(x = x_grid, y = predict(regressor, newdata = data.frame(Level = x_grid))),
             colour = 'blue') +
   ggtitle('Truth or Bluff (Regression Model)') + 
   xlab('Level') +
